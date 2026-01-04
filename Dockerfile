@@ -7,4 +7,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ml_api.py .
 
-CMD ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "${PORT}"]
+CMD uvicorn ml_api:app --host 0.0.0.0 --port $PORT
+
