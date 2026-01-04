@@ -18,7 +18,11 @@ class ReviewText(BaseModel):
 def load_model():
     global tokenizer, model
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, subfolder="model_roberta")
-    model = AutoModelForSequenceClassification.from_pretrained(MODEL_ID, subfolder="model_roberta")
+    model = AutoModelForSequenceClassification.from_pretrained(
+        MODEL_ID,
+        subfolder="model_roberta",
+        low_cpu_mem_usage=True
+    )
     model.to(device)
     model.eval()
 
