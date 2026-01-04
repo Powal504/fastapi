@@ -1,14 +1,12 @@
-FROM python:3.11-alpine
-
-# Alpine ma minimalny rozmiar, ale musimy zainstalować build-base i libc6-compat dla torch
-RUN apk add --no-cache \
-    build-base \
-    curl \
-    ca-certificates \
-    libc6-compat \
-    && rm -rf /var/cache/apk/*
+FROM python:3.11-slim
 
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
