@@ -1,7 +1,4 @@
 fastapi
 uvicorn[standard]
 transformers
-sentencepiece
-huggingface_hub
 torch==2.2.2+cpu
-numpy<2

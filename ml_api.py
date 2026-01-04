@@ -3,10 +3,10 @@ from pydantic import BaseModel
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-MODEL_ID = "Powal/roberta-review-sentiment"
+MODEL_ID = "distilbert-base-uncased-finetuned-sst-2-english"
 device = torch.device("cpu")
 
-app = FastAPI(title="RoBERTa Review Sentiment API")
+app = FastAPI(title="DistilBERT Sentiment API")
 
 tokenizer = None
 model = None
@@ -17,12 +17,8 @@ class ReviewText(BaseModel):
 @app.on_event("startup")
 def load_model():
     global tokenizer, model
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, subfolder="model_roberta")
-    model = AutoModelForSequenceClassification.from_pretrained(
-        MODEL_ID,
-        subfolder="model_roberta",
-        low_cpu_mem_usage=True
-    )
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+    model = AutoModelForSequenceClassification.from_pretrained(MODEL_ID)
     model.to(device)
     model.eval()
 
