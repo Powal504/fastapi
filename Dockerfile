@@ -8,4 +8,5 @@ RUN pip install --no-cache-dir --extra-index-url https://download.pytorch.org/wh
 
 COPY ml_api.py .
 
-CMD ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn ml_api:app --host 0.0.0.0 --port ${PORT:-8000}"]
+
