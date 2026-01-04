@@ -3,9 +3,8 @@ FROM python:3.11-slim
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
 
 COPY ml_api.py .
 
-CMD uvicorn ml_api:app --host 0.0.0.0 --port $PORT
-
+CMD ["uvicorn", "ml_api:app", "--host", "0.0.0.0", "--port", "8000"]
